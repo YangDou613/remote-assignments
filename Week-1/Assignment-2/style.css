@@ -10,16 +10,13 @@
 	font-size: 15px;
 	align-items: center;
 	padding: 15px 30px;
-/*	width: 100%;*/
 }
 .main-nav {
 	align-items: center;
 	padding: 15px 30px;
-/*	width: 100%;*/
 }
 .item {
 	font-size: 15px;
-/*	width: 100%;*/
 }
 .headline {
 	background-color: aliceblue;
@@ -31,13 +28,9 @@
 	text-align: center;
 	padding: 30px;
 }
-/*.container {
-	margin: 0px 300px 30px;
-}*/
 .box {
 	background-color: lightslategray;
 	text-align: center;
-/*	width: 550px;*/
 	width: 45%;
 	height: 150px;
 	margin: 10px;
@@ -45,11 +38,8 @@
 }
 .button {
     display: flex;
-    /* 水平置中 */
 	justify-content: center;
-	/* 垂直置中 */
 	align-content: center;
-/*	margin-top: 30px;*/
 }
 
 .button p {
@@ -58,55 +48,38 @@
 	padding: 15px 10px;
 	margin-top: 10px;
 }
-a { /*去除超連結底線、調整文字顏色*/
+a {
 	text-decoration: none;
 	color: black;
 }
-
-ul { /*去除前面標示*/
+ul {
 	list-style: none;
 }
-
-.main-nav a { /*為什麼要select a才會有作用，對item卻沒有效？*/
-/*	text-align: center;*/
-/*	display: block;*/
+.main-nav a {
 	padding: 10px 15px;
-/*	text-decoration: none;*/
 }
-/*.main-nav a {
-	font-size: .95em;
-	color: #3acec2;
-	text-transform: uppercase;
-}*/
-
 
 .main-header,
 .main-nav,
 .container {
 	display: flex;
-/*	flex-direction: row;*/
 }
 
 .main-header {
 	flex-direction: row;
 	flex-wrap: wrap;
-/*	align-items: center;*/
 	justify-content: space-between;
 }
 
 .main-nav {
 	flex-wrap: wrap;
-/*	flex-direction: row;*/
 }
 
 .container {
-/*	flex-flow: row wrap;*/
 	flex-wrap: wrap;
 	flex-direction: row;
-/*	justify-content: space-around;*/
 	justify-content: center;
 	align-content: center;
-/*	flex-basis: 1;*/
 	margin: auto;
 	width: 100%;
 }
