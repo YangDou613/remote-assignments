@@ -1,0 +1,92 @@
+* {
+	box-sizing: border-box;
+	margin: 0;
+}
+.main-header {
+	background-color: gainsboro;
+	width: 100%;
+}
+.name {
+	font-size: 15px;
+	align-items: center;
+	padding: 15px 30px;
+}
+.main-nav {
+	align-items: center;
+	padding: 15px 30px;
+}
+.item {
+	font-size: 15px;
+}
+.headline {
+	background-color: aliceblue;
+	text-align: center;
+	padding: 80px;
+	width: 100%;
+}
+.main-section {
+	text-align: center;
+	padding: 30px;
+}
+.box {
+	background-color: lightslategray;
+	text-align: center;
+	width: 45%;
+	height: 150px;
+	margin: 10px;
+	padding-top: 10px;
+}
+.button {
+	display: block;
+	width: 150px;
+	margin: auto;
+	background-color: aliceblue;
+	text-align: center;
+	padding: 15px 10px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+a {
+	text-decoration: none;
+	color: black;
+}
+ul {
+	list-style: none;
+}
+.main-nav a {
+	padding: 10px 15px;
+}
+
+.main-header,
+.main-nav,
+.container,
+.hide-container {
+	display: flex;
+}
+
+.main-header {
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.main-nav {
+	flex-wrap: wrap;
+}
+
+.container,
+.hide-container {
+	flex-wrap: wrap;
+	flex-direction: row;
+	justify-content: center;
+	align-content: center;
+	margin: auto;
+	width: 100%;
+}
+
+@media (min-width: 1200px) {
+    .container,
+    .hide-container {
+        max-width: 1200px;
+    }
+}
