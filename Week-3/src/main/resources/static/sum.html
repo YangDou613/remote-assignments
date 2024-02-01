@@ -8,12 +8,12 @@
 <body>
     <label for="number">Enter a number!</label><br>
     <input id="number" placeholder="Enter a number!"><br>
-    <button id="button">Get result!</button>
+    <button id="button" onclick="calculate()">Get result!</button>
     <p id="result"></p>
     <script>
         let currentURL = window.location.href;
+        let xhr = new XMLHttpRequest();
         if (currentURL.includes('data?number=')) {
-            let xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4) {
                     document.getElementById('result').innerHTML = xhr.responseText;
@@ -22,18 +22,18 @@
             xhr.open('GET', '../../java/com/example/firstwebserver/FirstWebServerApplication.java');
             xhr.send();
         }
-
-        const button = document.getElementById('button');
-        const result = document.getElementById('result');
-
-        button.addEventListener('click', ()=>{
-            const number = parseInt(document.getElementById('number').value);
-            let answer = 0;
-            for (let i = 1; i <= number; i++) {
-                answer += i;
+        if (currentURL.includes('sum.html')) {
+            function calculate() {
+                let number = document.getElementById('number').value;
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4) {
+                        document.getElementById('result').innerHTML = xhr.responseText;
+                    }
+                };
+                xhr.open('GET', '/sum?number='+number, true);
+                xhr.send();
             }
-            result.innerHTML = `The result is: ${answer.toString()}!`;
-        });
+        }
     </script>
 </body>
 </html>
