@@ -11,28 +11,16 @@
     <button id="button" onclick="calculate()">Get result!</button>
     <p id="result"></p>
     <script>
-        let currentURL = window.location.href;
-        let xhr = new XMLHttpRequest();
-        if (currentURL.includes('data?number=')) {
+        function calculate() {
+            let number = document.getElementById('number').value;
+            let xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4) {
                     document.getElementById('result').innerHTML = xhr.responseText;
                 }
             };
-            xhr.open('GET', '../../java/com/example/firstwebserver/FirstWebServerApplication.java');
+            xhr.open('GET', 'http://localhost:3000/data?number=' + number);
             xhr.send();
-        }
-        if (currentURL.includes('sum.html')) {
-            function calculate() {
-                let number = document.getElementById('number').value;
-                xhr.onreadystatechange = function() {
-                    if (xhr.readyState === 4) {
-                        document.getElementById('result').innerHTML = xhr.responseText;
-                    }
-                };
-                xhr.open('GET', '/sum?number='+number, true);
-                xhr.send();
-            }
         }
     </script>
 </body>

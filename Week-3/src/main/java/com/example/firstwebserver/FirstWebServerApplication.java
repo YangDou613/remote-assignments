@@ -52,26 +52,6 @@ public class FirstWebServerApplication {
         }
     }
 
-    @GetMapping("/sum")
-    public String calculate(@RequestParam(name = "number", required = false) String number) {
-        int intNumber = Integer.parseInt(number);
-        if (intNumber == 1) {
-            return "Result: 1";
-        } else {
-            String equation = "";
-            int answer = 0;
-            for (int i = 1; i <= intNumber; i++) {
-                if (equation.isEmpty()) {
-                    equation = equation.concat(Integer.toString(i));
-                } else {
-                    equation = (equation + "+").concat(Integer.toString(i));
-                }
-                answer += i;
-            }
-            return "Result: " + equation + "=" + answer;
-        }
-    }
-
     @GetMapping("/myName")
     public ResponseEntity<String> getMyName(@CookieValue(value = "username", defaultValue = "") String username) {
         if (!username.isEmpty()) {
