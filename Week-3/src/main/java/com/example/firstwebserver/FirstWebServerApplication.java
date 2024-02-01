@@ -4,12 +4,8 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @SpringBootApplication
 @RestController
@@ -53,41 +49,40 @@ public class FirstWebServerApplication {
     }
 
     @GetMapping("/myName")
-    public ResponseEntity<String> getMyName(@CookieValue(value = "username", defaultValue = "") String username) {
+    public ResponseEntity<String> checkName(@CookieValue(value = "username", defaultValue = "") String username) {
         if (!username.isEmpty()) {
             return ResponseEntity.ok("Username: " + username);
         } else {
             return ResponseEntity.ok(
-                "<form id=\"nameForm\" action=\"/trackName\" method=\"post\" onsubmit=\"updateURL()\">" +
-                "<label for=\"name\">Enter your name:</label><br>" +
-                "<input type=\"text\" id=\"name\" name=\"name\"><br>" +
-                "<button id=\"button\" type=\"submit\">Submit</button>" +
-                "</form>"+
                 "<script>" +
-                "   let currentURL = new URL(location.href);" +
-                "   var name = document.getElementById('name').value;" +
-                "   currentURL.searchParams.set('name', name);" +
-                "console.log(currentURL.toString())" +
-                "window.location.href = currentURL.toString();" +
+                    "window.location.replace('http://localhost:3000/trackName')" +
                 "</script>");
         }
     }
 
-    @PostMapping("/trackName")
-    public ResponseEntity<String> trackName(@RequestParam("name") String name, HttpServletResponse response) {
-        Cookie cookie = new Cookie("username", name);
-        response.addCookie(cookie);
-        String html =
-            "<html><body>" +
-            "<h1>Please click the link:</h1>" +
-            "<a id=\"newLink\" href=\"http://localhost:3000/myName\">http://localhost:3000/myName</a>" +
+    @GetMapping("/trackName")
+    public String trackName() {
+        return
+            "<form action='/trackName' method='post' onsubmit='encodeInput()'>" +
+                "<label for='name'>Enter username:</label><br>" +
+                "<input id='input' type='text' name='name'><br>" +
+                "<button type='submit'>Submit</button>" +
+            "</form>" +
             "<script>" +
-                "document.getElementById('newLink').addEventListener('click', function() {" +
-                "   window.location.href = 'http://localhost:3000/myName' ;" +
-                "});" +
-            "</script>" +
-            "</body></html>";
-        return ResponseEntity.status(200).body(html);
+            "function encodeInput() {" +
+            "   var nameInput = document.getElementById('input');" +
+            "   nameInput.value = encodeURIComponent(nameInput.value);" +
+            "}" +
+            "</script>";
+    }
+
+    @PostMapping("/trackName")
+    public ResponseEntity<String> addName(@RequestParam("name") String name, HttpServletResponse response) {
+        if (!name.isEmpty()) {
+            Cookie cookie = new Cookie("username", name);
+            response.addCookie(cookie);
+        }
+        return ResponseEntity.status(302).header("Location", "/myName").build();
     }
 
 }
