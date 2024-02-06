@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assignment 3</title>
+</head>
+<body>
+    <div id="title" th:unless="${error}">Home Page</div>
+    <div id="signUpForm" th:unless="${error}">
+        <label>Sign Up</label><br>
+        <input id="signUpEmail" placeholder="Email"><br>
+        <input id="signUpPassWord" placeholder="Password"><br>
+        <button id="signUp">Submit</button><br>
+    </div>
+
+    <div id="signInForm" th:unless="${error}">
+        <label>Sign In</label><br>
+        <input id="signInEmail" placeholder="Email"><br>
+        <input id="signInPassWord" placeholder="Password"><br>
+        <button id="signIn">Submit</button>
+    </div>
+
+    <p id="result" th:text="${error}"></p>
+
+    <script>
+        document.getElementById("signUp").addEventListener("click", () => {
+           let signUpEmail = document.getElementById("signUpEmail").value;
+           let signUpPassWord = document.getElementById("signUpPassWord").value;
+           let xhr = new XMLHttpRequest();
+           xhr.onreadystatechange = function () {
+               if (xhr.readyState === 4) {
+                   if (xhr.status === 200) {
+                       console.log("hello");
+                       window.location.replace('http://localhost:8080/memberPage');
+                   } else {
+                       document.getElementById("result").innerHTML = xhr.responseText;
+                   }
+               }
+           };
+           xhr.open("POST", "/homePage");
+           xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+           xhr.send("email=" + signUpEmail + "&password=" + signUpPassWord);
+        });
+
+        document.getElementById("signIn").addEventListener("click", () => {
+            let signInEmail = document.getElementById("signInEmail").value;
+            let signInPassWord = document.getElementById("signInPassWord").value;
+            let xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        console.log("hello");
+                        window.location.replace('http://localhost:8080/memberPage');
+                    } else {
+                        document.getElementById("result").innerHTML = xhr.responseText;
+                    }
+                }
+            };
+            xhr.open("POST", "/homePage");
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.send("email=" + signInEmail + "&password=" + signInPassWord);
+        });
+    </script>
+</body>
+</html>
