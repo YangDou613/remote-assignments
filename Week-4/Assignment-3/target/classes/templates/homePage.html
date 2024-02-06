@@ -26,39 +26,51 @@
         document.getElementById("signUp").addEventListener("click", () => {
            let signUpEmail = document.getElementById("signUpEmail").value;
            let signUpPassWord = document.getElementById("signUpPassWord").value;
-           let xhr = new XMLHttpRequest();
-           xhr.onreadystatechange = function () {
-               if (xhr.readyState === 4) {
-                   if (xhr.status === 200) {
-                       console.log("hello");
-                       window.location.replace('http://localhost:8080/memberPage');
-                   } else {
-                       document.getElementById("result").innerHTML = xhr.responseText;
+           if (signUpEmail.length > 0 && signUpPassWord.length > 0 && signUpEmail.includes("@")) {
+               let xhr = new XMLHttpRequest();
+               xhr.onreadystatechange = function () {
+                   if (xhr.readyState === 4) {
+                       if (xhr.status === 200) {
+                           console.log("hello");
+                           window.location.replace('http://localhost:8080/memberPage');
+                       } else {
+                           document.getElementById("result").innerHTML = xhr.responseText;
+                       }
                    }
-               }
-           };
-           xhr.open("POST", "/homePage");
-           xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-           xhr.send("email=" + signUpEmail + "&password=" + signUpPassWord);
+               };
+               xhr.open("POST", "/homePage");
+               xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+               xhr.send("email=" + signUpEmail + "&password=" + signUpPassWord + "&formType=" + "signUp");
+           } else if (signUpEmail.length === 0 && signUpPassWord.length === 0) {
+               document.getElementById("result").innerHTML = "Please enter email and password."
+           } else {
+               document.getElementById("result").innerHTML = "Please enter correct email."
+           }
         });
 
         document.getElementById("signIn").addEventListener("click", () => {
             let signInEmail = document.getElementById("signInEmail").value;
             let signInPassWord = document.getElementById("signInPassWord").value;
-            let xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4) {
-                    if (xhr.status === 200) {
-                        console.log("hello");
-                        window.location.replace('http://localhost:8080/memberPage');
-                    } else {
-                        document.getElementById("result").innerHTML = xhr.responseText;
+            if (signInEmail.length > 0 && signInPassWord.length > 0 && signInEmail.includes("@")) {
+                let xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status === 200) {
+                            console.log("hello");
+                            window.location.replace('http://localhost:8080/memberPage');
+                        } else {
+                            document.getElementById("result").innerHTML = xhr.responseText;
+                        }
                     }
-                }
-            };
-            xhr.open("POST", "/homePage");
-            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            xhr.send("email=" + signInEmail + "&password=" + signInPassWord);
+                };
+                xhr.open("POST", "/homePage");
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.send("email=" + signInEmail + "&password=" + signInPassWord + "&formType=" + "signIn");
+            } else if (signInEmail.length === 0 && signInPassWord.length === 0) {
+                document.getElementById("result").innerHTML = "Please enter email and password."
+            } else {
+                document.getElementById("result").innerHTML = "Please enter correct email."
+            }
         });
     </script>
 </body>

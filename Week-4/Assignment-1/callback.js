@@ -1,6 +1,6 @@
 function delayedResult(n1, n2, delaytime, callback) {
 	setTimeout(function() {
-		console.log(`${n1+n2} (${n1}+${n2})`)
+		callback(`${n1+n2} (${n1}+${n2})`);
 	}, delaytime);
 }
 
